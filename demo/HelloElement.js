@@ -5,7 +5,7 @@ export default class HelloElement extends MacroElement {
     const result = document.createElement("template");
     result.innerHTML = `
       Hello,
-      <slot></slot>.
+      <em><slot></slot></em>.
     `;
     return result;
   }

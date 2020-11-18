@@ -5,18 +5,26 @@ export default class MacroElement extends HTMLElement {
     const template = this.template;
     const clone = document.importNode(template.content, true);
 
-    // Move the existing light DOM content to a fragment.
-    const fragment = document.createDocumentFragment();
-    fragment.append(...this.childNodes);
+    // Create a temporary element with a shadow that uses the template.
+    const temp = document.createElement("div");
+    const tempRoot = temp.attachShadow({ mode: "open" });
+    tempRoot.appendChild(clone);
 
-    // Assign light DOM content to slots.
-    // For now, this just assumes a single slot.
-    const defaultSlot = clone.querySelector("slot");
-    if (defaultSlot) {
-      defaultSlot.replaceWith(fragment);
-    }
+    // Move our light DOM content to the temp element.
+    temp.append(...this.childNodes);
+
+    // The DOM has now assigned light DOM content to the slots.
+    // Replace all slots with their assigned nodes.
+    const slots = tempRoot.querySelectorAll("slot");
+    slots.forEach((slot) => {
+      // Extract the assigned nodes.
+      const fragment = document.createDocumentFragment();
+      fragment.append(...slot.assignedNodes());
+      // Replace the slot with the assigned nodes.
+      slot.replaceWith(fragment);
+    });
 
     // Replace existing light DOM with expanded content.
-    this.append(clone);
+    this.append(...tempRoot.childNodes);
   }
 }
