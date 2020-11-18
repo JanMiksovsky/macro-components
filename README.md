@@ -1,5 +1,3 @@
-# macro-elements
-
-Shows custom elements that perform a one-time expansion of the light DOM
+This repo shows a quick sketch of a macro component: a custom element that performs a one-time expansion of the light DOM.
 
 [Demo](https://janmiksovsky.github.io/macro-elements/index.html)
