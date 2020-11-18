@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Macro elements</title>
+    <script type="module" src="demo/HelloElement.js"></script>
+    <style>
+      body,
+      button,
+      input {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 15px;
+      }
+
+      body {
+        margin: 0;
+        padding: 25px;
+      }
+
+      p,
+      li {
+        max-width: 800px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <hello-element>world</hello-element>
+  </body>
+</html>
